@@ -1,7 +1,7 @@
 import { api } from "./apiClient";
 import { API_ENDPOINTS } from "../constants";
 
-interface UrlItem {
+export interface UrlItem {
   id: string;
   original_url: string;
   short_code: string;
@@ -10,7 +10,7 @@ interface UrlItem {
   created_at: string;
 }
 
-interface UrlHistoryResponse {
+export interface UrlHistoryResponse {
   data: {
     history: UrlItem[];
   };
@@ -27,12 +27,13 @@ export const shortenUrl = async (data: { original_url: string }) => {
 
 export const getUrlHistory = async (): Promise<UrlHistoryResponse> => {
   try {
-    const response = await api.get(API_ENDPOINTS.HISTORY);
-    return response as UrlHistoryResponse;
+    const response = await api.get<UrlHistoryResponse>(API_ENDPOINTS.HISTORY);
+    return response as unknown as UrlHistoryResponse;
   } catch (error) {
     throw error;
   }
 };
+
 
 export const deleteUrl = async (shortCode: string) => {
   try {

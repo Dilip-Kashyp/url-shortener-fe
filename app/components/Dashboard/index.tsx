@@ -17,6 +17,7 @@ interface UrlItem {
 
 export default function Dashboard() {
   const { data: historyData, refetch: refetchHistory } = useUrlHistory();
+  const { data: user, isLoading } = useCurrentUser();
 
   const [qrUrl, setQrUrl] = useState<string | null>(null);
   const [qrModalOpen, setQrModalOpen] = useState(false);
@@ -77,8 +78,6 @@ export default function Dashboard() {
     if (navigator.share) {
       try {
         await navigator.share({
-          title: "Shortened URL",
-          text: `Check out this link: ${url}`,
           url,
         });
       } catch (err) {
@@ -200,10 +199,7 @@ export default function Dashboard() {
   return (
     <>
       {contextHolder}
-
-      {/* QR Code Modal */}
       <Modal
-        title="QR Code for Short URL"
         open={qrModalOpen}
         onCancel={() => setQrModalOpen(false)}
         footer={null}
@@ -266,7 +262,7 @@ export default function Dashboard() {
           />
         </form>
 
-        <Flex flexProps={{ gap: 4, justify: "center", align: "center" }}>
+        {!user && <Flex flexProps={{ gap: 4, justify: "center", align: "center" }}>
           <Typography
             typographyProps={{
               level: 5,
@@ -280,7 +276,7 @@ export default function Dashboard() {
             placement="top"
             icon={<CircleQuestionMark size={14} />}
           />
-        </Flex>
+        </Flex>}
 
         <Table columns={columns} dataSource={dataSource} />
       </Container>

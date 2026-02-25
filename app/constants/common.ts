@@ -2,6 +2,7 @@ export const LOCAL_STORAGE_KEY = {
     ACCESS_TOKEN: "access_token",
     REFRESH_TOKEN: "refresh_token",
     USER: "user",
+    SESSION_TOKEN: "session_token",
 }
 
 export const API_ENDPOINTS = {

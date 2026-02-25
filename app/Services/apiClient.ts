@@ -1,5 +1,5 @@
 import Axios from "axios";
-import { getItem } from "./cookieStorage";
+import { getItem, setItem } from "./cookieStorage";
 import { LOCAL_STORAGE_KEY } from "../constants"
 
 function authRequestInterceptor(config: any) {
@@ -9,6 +9,11 @@ function authRequestInterceptor(config: any) {
   const accessToken = getItem(LOCAL_STORAGE_KEY.ACCESS_TOKEN);
   if (accessToken) {
     config.headers.Authorization = `Bearer ${accessToken}`;
+  } else {
+    const sessionToken = getItem(LOCAL_STORAGE_KEY.SESSION_TOKEN);
+    if (sessionToken) {
+      config.headers["x-session-token"] = sessionToken;
+    }
   }
   return config;
 }
@@ -21,6 +26,10 @@ export const api = Axios.create({
 api.interceptors.request.use(authRequestInterceptor);
 api.interceptors.response.use(
   (response) => {
+    const sessionToken = response.headers["x-session-token"];
+    if (sessionToken) {
+      setItem(LOCAL_STORAGE_KEY.SESSION_TOKEN, sessionToken);
+    }
     return response?.data;
   },
   (error) => {
