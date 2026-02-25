@@ -7,6 +7,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ArrowRight, Book, Link  } from "lucide-react";
 import { HERO_HEADING, HERO_BUTTON, TRY_IT_NOW_BUTTON, DOCS } from "@/app/constants";
 import { Container, Typography, Button, Floating } from "../common";
+import { useRouter } from "next/navigation";
 
 gsap.registerPlugin(TextPlugin, ScrollTrigger);
 
@@ -16,6 +17,7 @@ export default function LandinPage() {
   const labelRef = useRef<HTMLDivElement>(null);
   const videoSectionRef = useRef<HTMLDivElement>(null);
   const heroRef = useRef<HTMLDivElement>(null);
+  const router = useRouter();
 
   useEffect(() => {
     const tl = gsap.timeline();
@@ -92,6 +94,7 @@ export default function LandinPage() {
               buttonProps={{
                 type: "primary",
                 style: { padding: "20px 80px", borderRadius: "20px" },
+                onClick: () => router.push("/dashboard")
               }}
             >
               {TRY_IT_NOW_BUTTON}

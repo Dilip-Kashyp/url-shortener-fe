@@ -12,7 +12,6 @@
 
   /* Foreground / Text */
   --foreground: #000000;
-  --foreground-strong: #000000;
   --foreground-muted: #444444;
   --foreground-subtle: #6B7280;
   --foreground-placeholder: #9CA3AF;
@@ -82,4 +81,48 @@ body {
   background-color: var(--hover-default) !important;
   color: var(--hover-default-foreground) !important;
   border-color: var(--hover-default) !important;
+}
+
+.ant-table-thead > tr > th {
+  background-color: var(--primary) !important;
+  color: var(--primary-foreground) !important;
+  font-weight: 600 !important;
+} 
+
+.ant-pagination-item,
+.ant-pagination-prev,
+.ant-pagination-next {
+  border-radius: var(--radius-sm) !important;
+  border-color: var(--border-default) !important;
+}
+
+.ant-pagination-item a {
+  color: var(--foreground-muted) !important;
+}
+
+.ant-pagination-item-active {
+  border-color: var(--primary) !important;
+  background-color: transparent !important;
+}
+
+.ant-pagination-item-active a {
+  color: var(--primary) !important;
+  font-weight: 600 !important;
+}
+
+.ant-pagination-item:hover,
+.ant-pagination-prev:hover,
+.ant-pagination-next:hover {
+  border-color: var(--primary) !important;
+}
+
+.ant-pagination-item:hover a,
+.ant-pagination-prev:hover .ant-pagination-item-link,
+.ant-pagination-next:hover .ant-pagination-item-link {
+  color: var(--primary) !important;
+}
+
+.ant-pagination-prev .ant-pagination-item-link,
+.ant-pagination-next .ant-pagination-item-link {
+  background-color: transparent !important;
 }
